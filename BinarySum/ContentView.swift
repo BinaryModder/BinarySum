@@ -18,14 +18,12 @@ struct ContentView: View {
     @State private var errorMessage = ""
     
     let availableRadixes = Array(2...36)
-    
     var body: some View {
         VStack(spacing: 12) {
             Text("BinarySum")
                 .font(.headline)
                 .padding(.top, 8)
-            ForEach(0..<terms.count, id: \ .self) { idx in
-                HStack(spacing: 8) {
+            ForEach(0..<terms.count, id: \ .self) { idx in HStack(spacing: 8) {
                     TextField("Число", text: $terms[idx].value)
                         .textFieldStyle(RoundedBorderTextFieldStyle())
                         .frame(maxWidth: 90)
@@ -34,7 +32,7 @@ struct ContentView: View {
                             Text("\(radix)")
                         }
                     }
-                    .frame(maxWidth: 60)
+                    .frame(maxWidth: 90)
                 }
             }
             HStack(spacing: 8) {
@@ -50,14 +48,17 @@ struct ContentView: View {
                 }
             }
             HStack(spacing: 8) {
-                Text("Результат в системе:")
+                Text("Результат в системе счисления:")
                 Picker("Система счисления", selection: $resultRadix) {
                     ForEach(availableRadixes, id: \ .self) { radix in
                         Text("\(radix)")
                     }
+                    
                 }
-                .frame(maxWidth: 60)
+                .frame(maxWidth: 130)
             }
+            
+            
             Button("Посчитать сумму") {
                 calculateSumMulti()
             }
