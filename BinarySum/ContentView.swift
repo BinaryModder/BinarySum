@@ -8,17 +8,90 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State private var terms: [(value: String, radix: Int)] = [
+        ("", 10),
+        ("", 10),
+        ("", 10)
+    ]
+    @State private var resultRadix = 10
+    @State private var result = ""
+    @State private var errorMessage = ""
+    
+    let availableRadixes = Array(2...36)
+    
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        VStack(spacing: 12) {
+            Text("BinarySum")
+                .font(.headline)
+                .padding(.top, 8)
+            ForEach(0..<terms.count, id: \ .self) { idx in
+                HStack(spacing: 8) {
+                    TextField("Число", text: $terms[idx].value)
+                        .textFieldStyle(RoundedBorderTextFieldStyle())
+                        .frame(maxWidth: 90)
+                    Picker("Осн.", selection: $terms[idx].radix) {
+                        ForEach(availableRadixes, id: \ .self) { radix in
+                            Text("\(radix)")
+                        }
+                    }
+                    .frame(maxWidth: 60)
+                }
+            }
+            HStack(spacing: 8) {
+                Button("+") {
+                    terms.append(("", 10))
+                }
+                .frame(width: 30)
+                if terms.count > 1 {
+                    Button("-") {
+                        terms.removeLast()
+                    }
+                    .frame(width: 30)
+                }
+            }
+            HStack(spacing: 8) {
+                Text("Результат в системе:")
+                Picker("Система счисления", selection: $resultRadix) {
+                    ForEach(availableRadixes, id: \ .self) { radix in
+                        Text("\(radix)")
+                    }
+                }
+                .frame(maxWidth: 60)
+            }
+            Button("Посчитать сумму") {
+                calculateSumMulti()
+            }
+            .buttonStyle(BorderedProminentButtonStyle())
+            .clipShape(Capsule())
+            .frame(maxWidth: 180)
+            .padding(6)
+            if !result.isEmpty {
+                Text("Результат: \(result)")
+                    .font(.title3)
+                    .padding(4)
+            }
+            if !errorMessage.isEmpty {
+                Text(errorMessage)
+                    .foregroundColor(.red)
+                    .padding(4)
+            }
+            Spacer()
         }
-        .padding()
+        .frame(maxWidth: 260)
+        .padding(8)
     }
-}
-
-#Preview {
-    ContentView()
+    
+    func calculateSumMulti() {
+        errorMessage = ""
+        result = ""
+        var sum = 0
+        for (value, radix) in terms {
+            guard let num = Int(value, radix: radix) else {
+                errorMessage = "Ошибка: некорректное число \"\(value)\" для основания \(radix)"
+                return
+            }
+            sum += num
+        }
+        result = String(sum, radix: resultRadix).uppercased()
+    }
 }

@@ -13,5 +13,10 @@ struct BinarySumApp: App {
         WindowGroup {
             ContentView()
         }
+        .windowStyle(HiddenTitleBarWindowStyle())
+        .windowResizability(.contentSize)
+        .defaultSize(CGSize(width: 240, height: 340))
+        .windowToolbarStyle(UnifiedWindowToolbarStyle())
     }
+    
 }

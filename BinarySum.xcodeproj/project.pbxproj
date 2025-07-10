@@ -35,16 +35,6 @@
 			path = BinarySum;
 			sourceTree = "<group>";
 		};
-		817832C62E204F3100D7C753 /* BinarySumTests */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = BinarySumTests;
-			sourceTree = "<group>";
-		};
-		817832D02E204F3100D7C753 /* BinarySumUITests */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = BinarySumUITests;
-			sourceTree = "<group>";
-		};
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,8 +66,6 @@
 			isa = PBXGroup;
 			children = (
 				817832B72E204F3000D7C753 /* BinarySum */,
-				817832C62E204F3100D7C753 /* BinarySumTests */,
-				817832D02E204F3100D7C753 /* BinarySumUITests */,
 				817832B62E204F3000D7C753 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -130,9 +118,6 @@
 			dependencies = (
 				817832C52E204F3100D7C753 /* PBXTargetDependency */,
 			);
-			fileSystemSynchronizedGroups = (
-				817832C62E204F3100D7C753 /* BinarySumTests */,
-			);
 			name = BinarySumTests;
 			packageProductDependencies = (
 			);
@@ -152,9 +137,6 @@
 			);
 			dependencies = (
 				817832CF2E204F3100D7C753 /* PBXTargetDependency */,
-			);
-			fileSystemSynchronizedGroups = (
-				817832D02E204F3100D7C753 /* BinarySumUITests */,
 			);
 			name = BinarySumUITests;
 			packageProductDependencies = (
