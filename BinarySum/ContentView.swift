@@ -10,7 +10,6 @@ import SwiftUI
 struct ContentView: View {
     @State private var terms: [(value: String, radix: Int)] = [
         ("", 10),
-        ("", 10),
         ("", 10)
     ]
     @State private var resultRadix = 10
@@ -47,6 +46,7 @@ struct ContentView: View {
                     .frame(width: 30)
                 }
             }
+            
             HStack(spacing: 8) {
                 Text("Результат в системе счисления:")
                 Picker("Система счисления", selection: $resultRadix) {
@@ -59,7 +59,7 @@ struct ContentView: View {
             }
             
             
-            Button("Посчитать сумму") {
+            Button("Реультат") {
                 calculateSumMulti()
             }
             .buttonStyle(BorderedProminentButtonStyle())
@@ -70,6 +70,12 @@ struct ContentView: View {
                 Text("Результат: \(result)")
                     .font(.title3)
                     .padding(4)
+                
+                Button("Скопировать результат"){
+                    copyResult()
+                }
+                .buttonStyle(BorderedProminentButtonStyle())
+                .clipShape(Capsule())
             }
             if !errorMessage.isEmpty {
                 Text(errorMessage)
@@ -94,5 +100,12 @@ struct ContentView: View {
             sum += num
         }
         result = String(sum, radix: resultRadix).uppercased()
+    }
+    
+    func copyResult()
+    {
+        let pasteboard = NSPasteboard.general
+        pasteboard.clearContents()
+        pasteboard.setString(result, forType: .string)
     }
 }
